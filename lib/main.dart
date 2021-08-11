@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:luna/views/welcome.dart';
+import 'package:luna/widgets/splashLoading.dart';
 
-import './views/login.dart';
-
+// TODO : Clip size of logo
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIOverlays(
@@ -29,12 +30,14 @@ class MyApp extends StatelessWidget {
       builder: (context, AsyncSnapshot snapshot) {
         // Show splash screen while waiting for app resources to load:
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return MaterialApp(home: Login());
+          return MaterialApp(
+            home: SplashLoading(),
+            debugShowCheckedModeBanner: false,
+          );
         } else {
           // Loading is done, return the app:
           return MaterialApp(
-            home: Login(),
-          );
+              home: WelComeScreen(), debugShowCheckedModeBanner: false);
         }
       },
     );
