@@ -47,3 +47,5 @@ app.*.map.json
 
 # exclude google.json
 android/app/google-services.json
+
+dev
