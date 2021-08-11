@@ -36,9 +36,14 @@ dependencies:
 
 
 
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+    #for splash_Screen
+  flutter_native_splash: ^1.2.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -52,21 +57,15 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+  # backgrounds
+    - assets/bg/bg1.png
+    - assets/bg/bg2.png
 
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware.
+  # icons
+    - assets/icons/logo.png
+    - assets/icons/googleIcon.png
 
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages
-
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
   # fonts:
   #   - family: Schyler
   #     fonts:
