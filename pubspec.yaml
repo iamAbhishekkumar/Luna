@@ -66,17 +66,32 @@ flutter:
     - assets/icons/logo.png
     - assets/icons/googleIcon.png
 
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+  fonts:
+  - family: AlegreyaSans-Medium
+    fonts:
+      - asset: fonts/AlegreyaSans-Medium.ttf
+
+  - family: Alegreya-Regular
+    fonts:
+      - asset: fonts/Alegreya-Regular.ttf
+
+  - family: Alegreya-Medium
+    fonts:
+      - asset: fonts/Alegreya-Medium.ttf
+
+  - family: AlegreyaSans-Regular
+    fonts:
+      - asset: fonts/AlegreyaSans-Regular.ttf
+
+  - family: AlegreyaSans-Bold
+    fonts:
+      - asset: fonts/AlegreyaSans-Bold.ttf
+
+  - family: Alegreya-Bold
+    fonts:
+      - asset: fonts/Alegreya-Bold.ttf
+                        
+
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
