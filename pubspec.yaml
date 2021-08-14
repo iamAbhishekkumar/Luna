@@ -67,26 +67,30 @@ flutter:
     - assets/icons/googleIcon.png
 
   fonts:
-    - family: Hahmlet
-      fonts:
-        - asset: fonts/Hahmlet-Thin.ttf
-          weight: 100
-        - asset: fonts/Hahmlet-ExtraLight.ttf
-          weight: 200
-        - asset: fonts/Hahmlet-Light.ttf
-          weight: 300
-        - asset: fonts/Hahmlet-Regular.ttf
-          weight: 400
-        - asset: fonts/Hahmlet-Medium.ttf
-          weight: 500
-        - asset: fonts/Hahmlet-SemiBold.ttf
-          weight: 600
-        - asset: fonts/Hahmlet-Bold.ttf
-          weight: 700
-        - asset: fonts/Hahmlet-ExtraBold.ttf
-          weight: 800   
-        - asset: fonts/Hahmlet-Black.ttf
-          weight: 900                            
+  - family: AlegreyaSans-Medium
+    fonts:
+      - asset: fonts/AlegreyaSans-Medium.ttf
+
+  - family: Alegreya-Regular
+    fonts:
+      - asset: fonts/Alegreya-Regular.ttf
+
+  - family: Alegreya-Medium
+    fonts:
+      - asset: fonts/Alegreya-Medium.ttf
+
+  - family: AlegreyaSans-Regular
+    fonts:
+      - asset: fonts/AlegreyaSans-Regular.ttf
+
+  - family: AlegreyaSans-Bold
+    fonts:
+      - asset: fonts/AlegreyaSans-Bold.ttf
+
+  - family: Alegreya-Bold
+    fonts:
+      - asset: fonts/Alegreya-Bold.ttf
+                        
 
   #
   # For details regarding fonts from package dependencies,

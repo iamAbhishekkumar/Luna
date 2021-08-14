@@ -17,8 +17,7 @@ class SubmitButton extends StatelessWidget {
           style: TextStyle(
             fontSize: _width * 0.07,
             color: Colors.white,
-            // fontFamily: MyFont.myFont,
-            fontWeight: FontWeight.w400,
+            fontFamily: MyFont.alegreyaSansMedium,
           ),
         ),
         style: ElevatedButton.styleFrom(

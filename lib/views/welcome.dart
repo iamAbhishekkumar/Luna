@@ -55,24 +55,21 @@ class _WelComeScreenState extends State<WelComeScreen> {
           "WELCOME",
           style: TextStyle(
               color: Colors.white,
-              fontFamily: MyFont.myFont,
-              fontWeight: FontWeight.w700,
+              fontFamily: MyFont.alegreyaBold,
               fontSize: _width * 0.08),
         ),
         Text(
           "Do meditation.Stay focused.",
           style: TextStyle(
               color: Colors.white,
-              // fontFamily: MyFont.myFont,
-              // fontWeight: FontWeight.w500,
+              fontFamily: MyFont.alegreyaSansMedium,
               fontSize: _width * 0.05),
         ),
         Text(
           "Live a healthy life.",
           style: TextStyle(
               color: Colors.white,
-              // fontFamily: MyFont.myFont,
-              // fontWeight: FontWeight.w500,
+              fontFamily: MyFont.alegreyaSansMedium,
               fontSize: _width * 0.05),
         )
       ],
