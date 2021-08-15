@@ -7,8 +7,25 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:luna/views/errorPage.dart';
 import 'package:luna/views/welcome.dart';
 import 'package:luna/widgets/loading.dart';
-import 'package:luna/views/home.dart';
+import 'package:luna/views/homePage.dart';
 
+/*
+TODO : 1. remove side menu icon , thus it will look like
+logo           account
+
+in profile tab : display :
+image,name, application usage stats,you are feeling : ___ today (use shared pref. to store daily mood of person)
+
+in sounds tab : 
+carasoul : random item from all songs
+all songs
+
+in home : 
+1. how are you feeling today 
+2. different heading and five songs
+
+
+*/
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -29,7 +46,7 @@ class MyApp extends StatelessWidget {
             else if (snapshot.hasError) {
               return ErrorPage();
             } else if (snapshot.hasData) {
-              return Home();
+              return HomePage();
             }
             return WelComeScreen();
           },
