@@ -11,4 +11,5 @@ class MyFont {
 
 class MyColor {
   static final Color green = Color.fromARGB(255, 117, 156, 145);
+  static final Color bgColor = Color.fromARGB(255, 37, 51, 52);
 }
