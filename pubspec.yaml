@@ -67,6 +67,11 @@ flutter:
     - assets/bg/bg1.png
     - assets/bg/bg2.png
 
+  # emoji
+    - assets/moods/1.png
+    - assets/moods/2.png
+    - assets/moods/3.png
+    - assets/moods/4.png
 
   # icons
     - assets/logo.png
