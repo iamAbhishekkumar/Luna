@@ -20,19 +20,22 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   final user = FirebaseAuth.instance.currentUser;
   int _selectedIndex = 0;
+  List<Widget> _views = [];
+  List<HomeModel> _homeModels = [];
+
   @override
   void initState() {
-    // testing();
-    super.initState();
-  }
+    getData();
+    _views = <Widget>[
+      Home(
+        userName: user!.displayName!,
+        homeModels: _homeModels,
+      ),
+      Sounds(),
+      Profile(),
+    ];
 
-  void testing() async {
-    List<HomeModel> list = await Repository().getHomeContent();
-    print(list.length);
-    for (HomeModel h in list) {
-      print(h.heading);
-      print(h.soundsModel);
-    }
+    super.initState();
   }
 
   @override
@@ -46,11 +49,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
   }
 
-  static const List<Widget> _views = <Widget>[
-    Home(),
-    Sounds(),
-    Profile(),
-  ];
+  void getData() async {
+    _homeModels = await Repository().getHomeContent();
+  }
 
   void _onItemTapped(int index) {
     setState(() {
