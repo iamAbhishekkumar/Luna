@@ -19,6 +19,14 @@ class _HomePageState extends State<HomePage> {
   final user = FirebaseAuth.instance.currentUser;
   int _selectedIndex = 0;
 
+  late List<Widget> _pages;
+  @override
+  void initState() {
+    _pages = [Home(), Sounds(), Profile()];
+    super.initState();
+  }
+
+  final PageStorageBucket bucket = PageStorageBucket();
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
@@ -26,15 +34,9 @@ class _HomePageState extends State<HomePage> {
       appBar: appBar(_width),
       backgroundColor: MyColor.bgColor,
       bottomNavigationBar: _bottomNavBar(_width),
-      body: IndexedStack(
-        children: [
-          Home(
-            userName: user!.displayName!,
-          ),
-          Sounds(),
-          Profile(),
-        ],
-        index: _selectedIndex,
+      body: PageStorage(
+        child: _pages[_selectedIndex],
+        bucket: bucket,
       ),
     );
   }
@@ -48,6 +50,7 @@ class _HomePageState extends State<HomePage> {
   Widget _bottomNavBar(double width) {
     double _iconSize = width * 0.08;
     return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
             icon: Icon(Icons.home, size: _iconSize),

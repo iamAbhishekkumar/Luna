@@ -8,14 +8,22 @@ import 'package:luna/widgets/feelingTodayWidget.dart';
 import 'package:luna/widgets/loading.dart';
 
 class Home extends StatefulWidget {
-  final String userName;
-  const Home({required this.userName});
+  const Home({Key? key}) : super(key: key);
 
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
+  late Future _future;
+
+  @override
+  void initState() {
+    Repository _repo = Repository();
+    _future = _repo.getHomeContent();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
@@ -23,16 +31,27 @@ class _HomeState extends State<Home> {
       margin: EdgeInsets.only(
         left: _width * 0.06,
       ),
-      child: SingleChildScrollView(
-        physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            headingText(_width),
-            HowFeelingToday(),
-            buildMainPage(_width),
-          ],
-        ),
+      child: FutureBuilder(
+        future: _future,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting)
+            return Loading();
+          else if (snapshot.hasData) {
+            return SingleChildScrollView(
+              physics: BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics()),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  headingText(_width),
+                  HowFeelingToday(),
+                  buildMainPage(_width, snapshot.data as List<HomeModel>),
+                ],
+              ),
+            );
+          }
+          return ErrorOccurred();
+        },
       ),
     );
   }
@@ -44,7 +63,7 @@ class _HomeState extends State<Home> {
         right: width * 0.06,
       ),
       child: Text(
-        'Welcome back, ${widget.userName}!',
+        'Welcome back, Doremon!',
         style: TextStyle(
             color: Colors.white,
             fontFamily: MyFont.alegreyaMedium,
@@ -53,27 +72,15 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget buildMainPage(double width) {
-    return FutureBuilder(
-        future: Repository().getHomeContent(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError)
-            return ErrorOccurred();
-          else if (snapshot.connectionState == ConnectionState.waiting)
-            return Loading();
-          else if (snapshot.hasData) {
-            List<HomeModel> _list = snapshot.data as List<HomeModel>;
-            return ListView.builder(
-              scrollDirection: Axis.vertical,
-              physics: ClampingScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: _list.length,
-              itemBuilder: (context, index) =>
-                  buildTiles(_list[index].heading, _list[index].soundsModel),
-            );
-          }
-          return Container();
-        });
+  Widget buildMainPage(double width, List<HomeModel> _list) {
+    return ListView.builder(
+      scrollDirection: Axis.vertical,
+      physics: ClampingScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: _list.length,
+      itemBuilder: (context, index) =>
+          buildTiles(_list[index].heading, _list[index].soundsModel),
+    );
   }
 
   Widget buildTiles(String heading, List<SoundsModel> sounds) {
