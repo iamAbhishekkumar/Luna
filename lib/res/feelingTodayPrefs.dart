@@ -1,11 +1,10 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class FeelingToday {
+class FeelingTodayPrefs {
   void setDate() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     DateTime dateToday =
         DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
-    print(dateToday);
     await prefs.setString('Date', dateToday.toString());
   }
 
@@ -14,7 +13,6 @@ class FeelingToday {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     DateTime dateToday =
         DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
-    print(dateToday);
     res = prefs.getString('Date') ?? "";
     return res;
   }

@@ -2,8 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:luna/helper/helper.dart';
-import 'package:luna/model/homeModel.dart';
-import 'package:luna/res/repository.dart';
 import 'package:luna/widgets/logo.dart';
 
 import 'tabs/home.dart';
@@ -17,26 +15,9 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+class _HomePageState extends State<HomePage> {
   final user = FirebaseAuth.instance.currentUser;
   int _selectedIndex = 0;
-  List<Widget> _views = [];
-  List<HomeModel> _homeModels = [];
-
-  @override
-  void initState() {
-    getData();
-    _views = <Widget>[
-      Home(
-        userName: user!.displayName!,
-        homeModels: _homeModels,
-      ),
-      Sounds(),
-      Profile(),
-    ];
-
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,12 +26,17 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       appBar: appBar(_width),
       backgroundColor: MyColor.bgColor,
       bottomNavigationBar: _bottomNavBar(_width),
-      body: _views.elementAt(_selectedIndex),
+      body: IndexedStack(
+        children: [
+          Home(
+            userName: user!.displayName!,
+          ),
+          Sounds(),
+          Profile(),
+        ],
+        index: _selectedIndex,
+      ),
     );
-  }
-
-  void getData() async {
-    _homeModels = await Repository().getHomeContent();
   }
 
   void _onItemTapped(int index) {
@@ -85,11 +71,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       selectedLabelStyle: TextStyle(
           color: Colors.white,
           fontFamily: MyFont.alegreyaSansRegular,
-          fontSize: width * 0.05),
+          fontSize: width * 0.04),
       unselectedLabelStyle: TextStyle(
           color: Colors.white,
           fontFamily: MyFont.alegreyaSansRegular,
-          fontSize: width * 0.05),
+          fontSize: width * 0.03),
     );
   }
 
@@ -97,6 +83,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     return AppBar(
       backgroundColor: Colors.transparent,
       shadowColor: Colors.transparent,
+      actions: [],
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
