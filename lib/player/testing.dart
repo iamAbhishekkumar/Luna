@@ -3,7 +3,7 @@ import 'package:audioplayers/audioplayers.dart';
 
 import 'playerWidget.dart';
 
-const kUrl1 = 'demoUrl';
+const kUrl1 = 'deo';
 
 class SoundsPage extends StatefulWidget {
   @override
@@ -81,11 +81,13 @@ class _SoundsPageState extends State<SoundsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        remoteUrl(),
-      ],
+    return Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          remoteUrl(),
+        ],
+      ),
     );
   }
 }

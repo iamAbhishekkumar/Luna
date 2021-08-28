@@ -47,6 +47,5 @@ app.*.map.json
 
 # exclude google.json
 android/app/google-services.json
-
-screens
-flutter_native_splash.yaml
+.vscode/
+dev
