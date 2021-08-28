@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 
 import 'package:luna/helper/helper.dart';
 import 'package:luna/widgets/logo.dart';
-
-import 'tabs/home.dart';
-import 'tabs/profile.dart';
-import 'tabs/sounds.dart';
+import 'package:luna/widgets/tabs/home.dart';
+import 'package:luna/widgets/tabs/profile.dart';
+import 'package:luna/widgets/tabs/sounds.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage();
@@ -17,7 +16,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final user = FirebaseAuth.instance.currentUser;
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
 
   late List<Widget> _pages;
   @override
@@ -97,8 +96,15 @@ class _HomePageState extends State<HomePage> {
               size: width * 0.1,
             ),
           ),
-          Logo(
-            size: width * 0.2,
+          InkWell(
+            onTap: () {
+              setState(() {
+                _selectedIndex = 0;
+              });
+            },
+            child: Logo(
+              size: width * 0.2,
+            ),
           ),
           CircleAvatar(
             child: ClipRRect(

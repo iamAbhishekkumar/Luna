@@ -11,22 +11,15 @@ import 'package:luna/views/homePage.dart';
 
 /*
 TODO : 
-day 1 : {
-  1. remove side menu icon , thus it will look like
-  logo           account
-  in home : 
-  1. how are you feeling today (store in cache)
-  2. different heading and five songs
-  }
+{ 
+  
 
-day 2 : {
   in sounds tab : 
   carasoul : random item from all songs
   all songs,
   big screen : play songs(actualling playing live),
               bottam sheet playing(like in spotify)
-}
-day3 : {
+              
   in profile tab : display :
   image,name, application usage stats,you are feeling : ___ today (use shared pref. to store daily mood of person)
   

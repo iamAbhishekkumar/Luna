@@ -11,8 +11,6 @@ class FeelingTodayPrefs {
   Future<String> getDate() async {
     String res;
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    DateTime dateToday =
-        DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
     res = prefs.getString('Date') ?? "";
     return res;
   }

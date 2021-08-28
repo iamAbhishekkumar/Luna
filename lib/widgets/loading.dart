@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:luna/helper/helper.dart';
 
 class Loading extends StatelessWidget {
   const Loading({Key? key}) : super(key: key);
@@ -6,7 +7,9 @@ class Loading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: CircularProgressIndicator(),
+      child: CircularProgressIndicator(
+        color: MyColor.green,
+      ),
     );
   }
 }

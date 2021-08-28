@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+
 import 'package:luna/helper/helper.dart';
 import 'package:luna/model/homeModel.dart';
 import 'package:luna/model/soundsModel.dart';
 import 'package:luna/res/repository.dart';
-import 'package:luna/widgets/errorWidget.dart';
-import 'package:luna/widgets/feelingTodayWidget.dart';
-import 'package:luna/widgets/loading.dart';
+import 'package:luna/widgets/buildImage.dart';
+
+import '../errorWidget.dart';
+import '../feelingTodayWidget.dart';
+import '../loading.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -45,7 +48,10 @@ class _HomeState extends State<Home> {
                 children: <Widget>[
                   headingText(_width),
                   HowFeelingToday(),
-                  buildMainPage(_width, snapshot.data as List<HomeModel>),
+                  SizedBox(
+                    height: _width * 0.1,
+                  ),
+                  buildDisplaySounds(_width, snapshot.data as List<HomeModel>),
                 ],
               ),
             );
@@ -72,25 +78,33 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget buildMainPage(double width, List<HomeModel> _list) {
+  Widget buildDisplaySounds(double width, List<HomeModel> _list) {
     return ListView.builder(
       scrollDirection: Axis.vertical,
       physics: ClampingScrollPhysics(),
       shrinkWrap: true,
       itemCount: _list.length,
       itemBuilder: (context, index) =>
-          buildTiles(_list[index].heading, _list[index].soundsModel),
+          buildTiles(_list[index].heading, _list[index].soundsModel, width),
     );
   }
 
-  Widget buildTiles(String heading, List<SoundsModel> sounds) {
+  Widget buildTiles(String heading, List<SoundsModel> sounds, double width) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(heading),
+        Text(
+          heading,
+          style: TextStyle(
+              color: Colors.white,
+              fontFamily: MyFont.alegreyaMedium,
+              fontSize: width * 0.09),
+        ),
         Container(
-          height: 200,
+          height: width * 0.9,
           child: ListView.builder(
-            itemBuilder: (context, index) => buildTileItems(sounds[index]),
+            itemBuilder: (context, index) =>
+                buildTileItems(sounds[index], width),
             itemCount: sounds.length,
             scrollDirection: Axis.horizontal,
           ),
@@ -99,16 +113,41 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget buildTileItems(SoundsModel soundsModel) {
-    return Column(
-      children: [
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: 50),
-          width: 200,
-          height: 200,
-          color: Colors.green,
-        ),
-      ],
+  Widget buildTileItems(SoundsModel soundsModel, double width) {
+    return Container(
+      margin: EdgeInsets.only(
+          right: width * 0.1, top: width * 0.06, bottom: width * 0.1),
+      width: width * 0.6,
+      height: width * 0.9,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: width * 0.6,
+            height: width * 0.6,
+            child: BuildImage(
+              imageUrl: soundsModel.imageUrl,
+              key: Key(soundsModel.name),
+            ),
+          ),
+          Text(
+            soundsModel.name,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+                color: Colors.white,
+                fontFamily: MyFont.alegreyaSansRegular,
+                fontSize: width * 0.07),
+          ),
+          Text(
+            soundsModel.artist,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+                color: Colors.grey,
+                fontFamily: MyFont.alegreyaSansRegular,
+                fontSize: width * 0.04),
+          ),
+        ],
+      ),
     );
   }
 }
