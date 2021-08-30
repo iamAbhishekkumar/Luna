@@ -108,9 +108,9 @@ flutter:
 
 flutter_icons:
   android: "launcher_icon"
-  image_path: "assets/iconlogo.png"  
+  image_path: "assets/logo.png"  
   adaptive_icon_background: "assets/iconbg.png"
-  adaptive_icon_foreground: "assets/iconlogo.png"
+  adaptive_icon_foreground: "assets/logo.png"
 
   #
   # For details regarding fonts from package dependencies,
