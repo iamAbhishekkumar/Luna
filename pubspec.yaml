@@ -52,6 +52,7 @@ dev_dependencies:
 
     #for splash_Screen
   flutter_native_splash: ^1.2.1
+  flutter_launcher_icons: "^0.9.2"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -103,7 +104,13 @@ flutter:
   - family: Alegreya-Bold
     fonts:
       - asset: fonts/Alegreya-Bold.ttf
-                        
+
+
+flutter_icons:
+  android: "launcher_icon"
+  image_path: "assets/logo.png"  
+  adaptive_icon_background: "assets/iconbg.png"
+  adaptive_icon_foreground: "assets/logo.png"
 
   #
   # For details regarding fonts from package dependencies,
