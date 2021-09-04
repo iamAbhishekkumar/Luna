@@ -68,6 +68,7 @@ class _SoundsState extends State<Sounds> {
                 height: width * 0.65,
                 child: BuildImage(
                   imageUrl: list[_index].imageUrl,
+                  radius: 20,
                 ),
               ),
             ),
@@ -131,6 +132,7 @@ class _SoundsState extends State<Sounds> {
                   margin: EdgeInsets.all(width * 0.03),
                   child: BuildImage(
                     imageUrl: soundsModel.imageUrl,
+                    radius: 20,
                   ),
                 ),
                 Column(
