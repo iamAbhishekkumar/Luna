@@ -3,7 +3,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="luna"
+        android:label="Luna"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"

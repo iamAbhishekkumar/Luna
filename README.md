@@ -1,16 +1,37 @@
-# luna
+# <center> Luna
 
-A new Flutter project.
+#### <center> Relaxing Music App
 
-## Getting Started
+<center><img src="README_Assets/icon.png" alt="icon" width="100"/>
 
-This project is a starting point for a Flutter application.
+![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white) ![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase)
 
-A few resources to get you started if this is your first Flutter project:
+</center>
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+![Main](README_Assets/ss1.png#main) ![sounds](README_Assets/ss2.png#sounds) ![player](README_Assets/ss3.png#player)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<style> 
+img[src$="#main"] { 
+  border-radius: 20px; 
+  margin: 20px;
+  width: 30%; 
+}
+
+img[src$="#sounds"] {
+  border-radius: 20px; 
+  margin: 20px;
+  width: 30%; 
+}
+
+img[src$="#player"] {
+  border-radius: 20px; 
+  margin: 20px;
+  width: 30%; 
+}
+</style>
+
+## References
+
+* [Figma assets](https://www.figma.store/download/medic-free-meditation-app-for-figma/)
+
+* [Vectors](https://www.freepik.com/free-vector)

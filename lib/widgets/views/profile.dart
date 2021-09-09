@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:luna/auth/google.dart';
 import 'package:luna/helper/helper.dart';
 
 class Profile extends StatefulWidget {
@@ -63,7 +64,9 @@ class _ProfileState extends State<Profile> {
                 ),
                 Container(
                   child: ElevatedButton(
-                    onPressed: () async {},
+                    onPressed: () async {
+                      Google().handleLogOut();
+                    },
                     child: Text(
                       "Login Out",
                       style: TextStyle(
