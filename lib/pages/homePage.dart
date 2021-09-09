@@ -123,6 +123,7 @@ class _HomePageState extends State<HomePage> {
               ),
               onTap: () {
                 _onItemTapped(0);
+                Constants.isHome = !Constants.isHome;
                 Navigator.pop(context);
               },
             ),
@@ -141,6 +142,7 @@ class _HomePageState extends State<HomePage> {
               ),
               onTap: () {
                 _onItemTapped(1);
+                Constants.isHome = !Constants.isHome;
                 Navigator.pop(context);
               },
             ),
@@ -270,7 +272,6 @@ class _HomePageState extends State<HomePage> {
       automaticallyImplyLeading: false,
       backgroundColor: Colors.transparent,
       shadowColor: Colors.transparent,
-      actions: [],
       title: Builder(
         builder: (context) => Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -289,11 +290,12 @@ class _HomePageState extends State<HomePage> {
                 IconButton(
                   onPressed: () {
                     setState(() {
-                      _selectedIndex = 1;
+                      _selectedIndex = Constants.isHome ? 1 : 0;
+                      Constants.isHome = !Constants.isHome;
                     });
                   },
                   icon: Icon(
-                    LineIcons.headphones,
+                    Constants.isHome ? LineIcons.headphones : LineIcons.home,
                     size: width * 0.1,
                   ),
                 ),

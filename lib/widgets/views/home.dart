@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:luna/helper/helper.dart';
 import 'package:luna/model/homeModel.dart';
 import 'package:luna/model/soundsModel.dart';
-import 'package:luna/pages/player.dart';
+import 'package:luna/pages/playerPage.dart';
 import 'package:luna/res/repository.dart';
-import 'package:luna/widgets/buildImage.dart';
 
+import '../buildImage.dart';
 import '../errorWidget.dart';
 import '../feelingTodayWidget.dart';
 import '../loading.dart';
@@ -124,8 +124,11 @@ class _HomeState extends State<Home> {
           InkWell(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) =>
-                    Player(soundsModel: soundsModel, index: index),
+                builder: (context) => PlayerPage(
+                  soundsModel: soundsModel,
+                  index: index,
+                  isRandomCard: false,
+                ),
               ));
             },
             child: Container(

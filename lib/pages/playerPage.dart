@@ -5,17 +5,22 @@ import 'package:luna/model/soundsModel.dart';
 import 'package:luna/player/playerWidget.dart';
 import 'package:luna/widgets/buildImage.dart';
 
-class Player extends StatefulWidget {
+class PlayerPage extends StatefulWidget {
   final SoundsModel soundsModel;
   final int index;
-  const Player({Key? key, required this.soundsModel, required this.index})
+  final bool isRandomCard;
+  const PlayerPage(
+      {Key? key,
+      required this.soundsModel,
+      required this.index,
+      required this.isRandomCard})
       : super(key: key);
 
   @override
-  _PlayerState createState() => _PlayerState();
+  _PlayerPageState createState() => _PlayerPageState();
 }
 
-class _PlayerState extends State<Player> {
+class _PlayerPageState extends State<PlayerPage> {
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
@@ -32,7 +37,11 @@ class _PlayerState extends State<Player> {
                 width: _width * 0.7,
                 height: _width * 0.7,
                 child: Hero(
-                  tag: widget.soundsModel.name + widget.index.toString(),
+                  tag: widget.isRandomCard
+                      ? widget.soundsModel.name +
+                          widget.index.toString() +
+                          "random"
+                      : widget.soundsModel.name + widget.index.toString(),
                   child: BuildImage(
                     imageUrl: widget.soundsModel.imageUrl,
                     radius: _width * 0.7,
@@ -56,6 +65,7 @@ class _PlayerState extends State<Player> {
               ),
               PlayerWidget(
                 url: widget.soundsModel.soundUrl,
+                defaultDuration: strToDuration(widget.soundsModel.duration),
               )
             ],
           ),
@@ -105,5 +115,16 @@ class _PlayerState extends State<Player> {
         ),
       ),
     );
+  }
+
+  Duration strToDuration(String time) {
+    int min = 0, sec = 0;
+    try {
+      min = int.parse(time.split(':').first);
+      sec = int.parse(time.split(':').last);
+    } on Exception {
+      print("Wrong Formatted duration");
+    }
+    return Duration(minutes: min, seconds: sec);
   }
 }

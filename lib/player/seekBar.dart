@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:luna/helper/helper.dart';
 
 class SeekBar extends StatefulWidget {
   final Duration duration;
@@ -21,26 +22,60 @@ class SeekBar extends StatefulWidget {
 
 class _SeekBarState extends State<SeekBar> {
   double? _dragValue;
+
   @override
   Widget build(BuildContext context) {
+    double _width = MediaQuery.of(context).size.width;
     return Column(
       children: [
-        Slider(
-          min: 0.0,
-          max: widget.duration.inMilliseconds.toDouble(),
-          value: min(_dragValue ?? widget.position.inMilliseconds.toDouble(),
-              widget.duration.inMilliseconds.toDouble()),
-          onChanged: (value) {
-            setState(() {
-              _dragValue = value;
-            });
-            if (widget.onChanged != null) {
-              widget.onChanged!(Duration(milliseconds: value.round()));
-            }
-          },
+        SliderTheme(
+          data: SliderTheme.of(context).copyWith(
+            activeTrackColor: MyColor.yellow,
+            inactiveTrackColor: Colors.grey,
+            trackHeight: 5.0,
+            thumbColor: MyColor.yellow,
+            thumbShape: RoundSliderThumbShape(enabledThumbRadius: 10),
+            overlayColor: Colors.purple.withAlpha(32),
+            overlayShape: RoundSliderOverlayShape(overlayRadius: 14.0),
+          ),
+          child: Slider(
+            min: 0.0,
+            max: widget.duration.inMilliseconds.toDouble(),
+            value: min(_dragValue ?? widget.position.inMilliseconds.toDouble(),
+                widget.duration.inMilliseconds.toDouble()),
+            onChanged: (value) {
+              setState(() {
+                _dragValue = value;
+              });
+              if (widget.onChanged != null) {
+                widget.onChanged!(Duration(milliseconds: value.round()));
+              }
+              _dragValue = null;
+            },
+          ),
         ),
-        Text(_durationText, style: Theme.of(context).textTheme.caption),
-        Text(_positionText, style: Theme.of(context).textTheme.caption),
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: _width * 0.05),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                _positionText,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: MyFont.alegreyaSansRegular,
+                    fontSize: _width * 0.05),
+              ),
+              Text(
+                _durationText,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: MyFont.alegreyaSansRegular,
+                    fontSize: _width * 0.05),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }

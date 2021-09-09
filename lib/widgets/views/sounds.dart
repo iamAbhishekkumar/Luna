@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:luna/helper/helper.dart';
 import 'package:luna/model/soundsModel.dart';
+import 'package:luna/pages/playerPage.dart';
 import 'package:luna/res/repository.dart';
 import 'package:luna/widgets/buildImage.dart';
 
@@ -53,7 +54,15 @@ class _SoundsState extends State<Sounds> {
   Widget randomCard(List<SoundsModel> list, double width) {
     int _index = getRandom(list.length - 1);
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => PlayerPage(
+            soundsModel: list[_index],
+            index: _index,
+            isRandomCard: true,
+          ),
+        ));
+      },
       child: Container(
         width: width,
         height: width * 0.80,
@@ -66,9 +75,12 @@ class _SoundsState extends State<Sounds> {
                     left: width * 0.03, right: width * 0.03, top: width * 0.1),
                 width: width,
                 height: width * 0.65,
-                child: BuildImage(
-                  imageUrl: list[_index].imageUrl,
-                  radius: 20,
+                child: Hero(
+                  tag: list[_index].name + _index.toString() + "random",
+                  child: BuildImage(
+                    imageUrl: list[_index].imageUrl,
+                    radius: 20,
+                  ),
                 ),
               ),
             ),
@@ -107,13 +119,21 @@ class _SoundsState extends State<Sounds> {
       physics: ClampingScrollPhysics(),
       shrinkWrap: true,
       itemCount: list.length,
-      itemBuilder: (context, index) => _buildTiles(list[index], width),
+      itemBuilder: (context, index) => _buildTiles(list[index], width, index),
     );
   }
 
-  Widget _buildTiles(SoundsModel soundsModel, double width) {
+  Widget _buildTiles(SoundsModel soundsModel, double width, int index) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => PlayerPage(
+            soundsModel: soundsModel,
+            index: index,
+            isRandomCard: false,
+          ),
+        ));
+      },
       child: Container(
         margin: EdgeInsets.only(
             left: width * 0.03,
@@ -130,9 +150,12 @@ class _SoundsState extends State<Sounds> {
                   height: width * 0.25,
                   width: width * 0.25,
                   margin: EdgeInsets.all(width * 0.03),
-                  child: BuildImage(
-                    imageUrl: soundsModel.imageUrl,
-                    radius: 20,
+                  child: Hero(
+                    tag: soundsModel.name + index.toString(),
+                    child: BuildImage(
+                      imageUrl: soundsModel.imageUrl,
+                      radius: 20,
+                    ),
                   ),
                 ),
                 Column(

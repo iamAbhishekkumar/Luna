@@ -31,15 +31,22 @@ dependencies:
 
   # For sounds : 
   just_audio: ^0.9.9
-  path_provider: ^2.0.2
+  
+  # fetching data
   http: ^0.13.3
-  shared_preferences: ^2.0.6
+
+
+  # firebase
   google_sign_in: ^5.0.7
   firebase_auth: ^3.0.1
   firebase_core: ^1.4.0
 
+  #caching
   cached_network_image: ^3.1.0
+
+  # for ui
   line_icons: ^2.0.1
+  flutter_spinkit: ^5.1.0
   
   
 

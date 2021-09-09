@@ -11,20 +11,6 @@ import 'pages/errorPage.dart';
 import 'pages/homePage.dart';
 import 'pages/welcome.dart';
 
-/*
-TODO : 
-{ 
-  FIRST TASK : playing music.......    
-
-  
-}
-
-additional features : {
-
-  noification playing,
-  background playing
-}
-*/
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:audio_session/audio_session.dart';
+import 'package:luna/helper/helper.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'positionData.dart';
@@ -9,7 +11,10 @@ import 'seekBar.dart';
 
 class PlayerWidget extends StatefulWidget {
   final String url;
-  const PlayerWidget({Key? key, required this.url}) : super(key: key);
+  final Duration defaultDuration;
+  const PlayerWidget(
+      {Key? key, required this.url, required this.defaultDuration})
+      : super(key: key);
 
   @override
   _PlayerWidgetState createState() => _PlayerWidgetState();
@@ -17,6 +22,7 @@ class PlayerWidget extends StatefulWidget {
 
 class _PlayerWidgetState extends State<PlayerWidget> {
   final _player = AudioPlayer();
+  bool isLoopingCurrentItem = false;
 
   @override
   void initState() {
@@ -39,6 +45,16 @@ class _PlayerWidgetState extends State<PlayerWidget> {
     }
   }
 
+  void handleLooping() async {
+    if (isLoopingCurrentItem)
+      await _player.setLoopMode(LoopMode.one);
+    else
+      await _player.setLoopMode(LoopMode.off);
+    setState(() {
+      isLoopingCurrentItem = !isLoopingCurrentItem;
+    });
+  }
+
   Stream<PositionData> get _positionDataStream =>
       Rx.combineLatest3<Duration, Duration, Duration?, PositionData>(
           _player.positionStream,
@@ -53,13 +69,14 @@ class _PlayerWidgetState extends State<PlayerWidget> {
     return Column(
       children: [
         Container(
-          margin: EdgeInsets.symmetric(vertical: _width * 0.1),
+          margin: EdgeInsets.symmetric(
+              vertical: _width * 0.1, horizontal: _width * 0.015),
           child: StreamBuilder<PositionData>(
             stream: _positionDataStream,
             builder: (context, snapshot) {
               final positionData = snapshot.data;
               return SeekBar(
-                duration: positionData?.duration ?? Duration.zero,
+                duration: positionData?.duration ?? widget.defaultDuration,
                 position: positionData?.position ?? Duration.zero,
                 bufferedPosition:
                     positionData?.bufferedPosition ?? Duration.zero,
@@ -96,28 +113,71 @@ class _PlayerWidgetState extends State<PlayerWidget> {
                   if (processingState == ProcessingState.loading ||
                       processingState == ProcessingState.buffering) {
                     return Container(
-                      margin: EdgeInsets.all(8.0),
-                      width: 64.0,
-                      height: 64.0,
-                      child: CircularProgressIndicator(),
-                    );
+                        padding: EdgeInsets.all(_width * 0.05),
+                        decoration: BoxDecoration(
+                          color: MyColor.yellow,
+                          borderRadius: BorderRadius.circular(_width),
+                        ),
+                        width: _width * 0.24,
+                        height: _width * 0.24,
+                        child: SpinKitRipple(
+                          color: MyColor.bgColor,
+                          duration: Duration(milliseconds: 800),
+                          size: _width * 0.24,
+                        ));
                   } else if (playing != true) {
-                    return IconButton(
-                      icon: Icon(Icons.play_arrow),
-                      iconSize: 64.0,
-                      onPressed: _player.play,
+                    return InkWell(
+                      onTap: _player.play,
+                      child: Container(
+                        width: _width * 0.24,
+                        height: _width * 0.24,
+                        padding: EdgeInsets.all(_width * 0.05),
+                        decoration: BoxDecoration(
+                          color: MyColor.yellow,
+                          borderRadius: BorderRadius.circular(_width),
+                        ),
+                        child: Icon(
+                          LineIcons.play,
+                          color: MyColor.bgColor,
+                          size: _width * 0.14,
+                        ),
+                      ),
                     );
                   } else if (processingState != ProcessingState.completed) {
-                    return IconButton(
-                      icon: Icon(Icons.pause),
-                      iconSize: 64.0,
-                      onPressed: _player.pause,
+                    return InkWell(
+                      onTap: _player.pause,
+                      child: Container(
+                        width: _width * 0.24,
+                        height: _width * 0.24,
+                        padding: EdgeInsets.all(_width * 0.05),
+                        decoration: BoxDecoration(
+                          color: MyColor.yellow,
+                          borderRadius: BorderRadius.circular(_width),
+                        ),
+                        child: Icon(
+                          LineIcons.pause,
+                          color: MyColor.bgColor,
+                          size: _width * 0.14,
+                        ),
+                      ),
                     );
                   } else {
-                    return IconButton(
-                      icon: Icon(Icons.replay),
-                      iconSize: 64.0,
-                      onPressed: () => _player.seek(Duration.zero),
+                    return InkWell(
+                      onTap: () => _player.seek(Duration.zero),
+                      child: Container(
+                        width: _width * 0.24,
+                        height: _width * 0.24,
+                        padding: EdgeInsets.all(_width * 0.05),
+                        decoration: BoxDecoration(
+                          color: MyColor.yellow,
+                          borderRadius: BorderRadius.circular(_width),
+                        ),
+                        child: Icon(
+                          LineIcons.alternateRedo,
+                          color: MyColor.bgColor,
+                          size: _width * 0.14,
+                        ),
+                      ),
                     );
                   }
                 },
@@ -131,10 +191,10 @@ class _PlayerWidgetState extends State<PlayerWidget> {
                 ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () => handleLooping(),
                 icon: Icon(
                   LineIcons.retweet,
-                  color: Colors.grey,
+                  color: isLoopingCurrentItem ? Colors.grey : MyColor.yellow,
                   size: _width * 0.1,
                 ),
               ),

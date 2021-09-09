@@ -14,3 +14,7 @@ class MyColor {
   static final Color bgColor = Color.fromARGB(255, 37, 51, 52);
   static final Color yellow = Color.fromARGB(255, 247, 243, 240);
 }
+
+class Constants {
+  static bool isHome = true;
+}
