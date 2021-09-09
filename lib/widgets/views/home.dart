@@ -3,15 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:luna/helper/helper.dart';
 import 'package:luna/model/homeModel.dart';
 import 'package:luna/model/soundsModel.dart';
+import 'package:luna/pages/playerPage.dart';
 import 'package:luna/res/repository.dart';
-import 'package:luna/widgets/buildImage.dart';
 
+import '../buildImage.dart';
 import '../errorWidget.dart';
 import '../feelingTodayWidget.dart';
 import '../loading.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  final String name;
+  const Home({Key? key, required this.name}) : super(key: key);
 
   @override
   _HomeState createState() => _HomeState();
@@ -48,9 +50,6 @@ class _HomeState extends State<Home> {
                 children: <Widget>[
                   headingText(_width),
                   HowFeelingToday(),
-                  SizedBox(
-                    height: _width * 0.1,
-                  ),
                   buildDisplaySounds(_width, snapshot.data as List<HomeModel>),
                 ],
               ),
@@ -69,7 +68,7 @@ class _HomeState extends State<Home> {
         right: width * 0.06,
       ),
       child: Text(
-        'Welcome back, Doremon!',
+        'Welcome back, ${widget.name}',
         style: TextStyle(
             color: Colors.white,
             fontFamily: MyFont.alegreyaMedium,
@@ -104,7 +103,7 @@ class _HomeState extends State<Home> {
           height: width * 0.9,
           child: ListView.builder(
             itemBuilder: (context, index) =>
-                buildTileItems(sounds[index], width),
+                buildTileItems(sounds[index], width, index),
             itemCount: sounds.length,
             scrollDirection: Axis.horizontal,
           ),
@@ -113,7 +112,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget buildTileItems(SoundsModel soundsModel, double width) {
+  Widget buildTileItems(SoundsModel soundsModel, double width, int index) {
     return Container(
       margin: EdgeInsets.only(
           right: width * 0.1, top: width * 0.06, bottom: width * 0.1),
@@ -122,12 +121,27 @@ class _HomeState extends State<Home> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            width: width * 0.6,
-            height: width * 0.6,
-            child: BuildImage(
-              imageUrl: soundsModel.imageUrl,
-              key: Key(soundsModel.name),
+          InkWell(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => PlayerPage(
+                  soundsModel: soundsModel,
+                  index: index,
+                  isRandomCard: false,
+                ),
+              ));
+            },
+            child: Container(
+              width: width * 0.6,
+              height: width * 0.6,
+              child: Hero(
+                tag: soundsModel.name + index.toString(),
+                child: BuildImage(
+                  imageUrl: soundsModel.imageUrl,
+                  radius: 20,
+                  key: Key(soundsModel.name),
+                ),
+              ),
             ),
           ),
           Text(

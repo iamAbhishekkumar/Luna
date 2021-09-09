@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:luna/widgets/loading.dart';
 
 class BuildImage extends StatelessWidget {
-  final imageUrl;
-  const BuildImage({Key? key, this.imageUrl}) : super(key: key);
+  final String imageUrl;
+  final double radius;
+  const BuildImage({Key? key, required this.imageUrl, required this.radius})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(20),
+      borderRadius: BorderRadius.circular(radius),
       child: CachedNetworkImage(
         fit: BoxFit.cover,
         imageUrl: imageUrl,
