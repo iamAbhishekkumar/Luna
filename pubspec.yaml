@@ -43,6 +43,8 @@ dependencies:
 
   #caching
   cached_network_image: ^3.1.0
+  
+  url_launcher: ^6.0.10
 
   # for ui
   line_icons: ^2.0.1
