@@ -2,13 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:luna/helper/helper.dart';
 import 'package:luna/widgets/views/home.dart';
 import 'package:luna/widgets/views/profile.dart';
 import 'package:luna/widgets/views/sounds.dart';
-
-import '../widgets/views/feedBack.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage();
@@ -31,7 +30,6 @@ class _HomePageState extends State<HomePage> {
       ),
       Sounds(),
       Profile(),
-      AboutUs(),
     ];
     super.initState();
   }
@@ -167,18 +165,19 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               leading: Icon(
                 LineIcons.info,
-                color: _isSelected(3),
+                color: Colors.grey,
                 size: width * 0.08,
               ),
               title: Text(
-                'About Us',
+                'Raise Issue',
                 style: TextStyle(
-                    color: _isSelected(3),
+                    color: Colors.grey,
                     fontFamily: MyFont.alegreyaSansRegular,
                     fontSize: width * 0.07),
               ),
               onTap: () {
-                _onItemTapped(3);
+                _launchInBrowser(
+                    "https://github.com/iamAbhishekkumar/Luna/issues/new");
                 Navigator.pop(context);
               },
             ),
@@ -201,7 +200,7 @@ class _HomePageState extends State<HomePage> {
                   size: width * 0.08,
                 ),
                 title: Text(
-                  'Read Articles',
+                  'Books',
                   style: TextStyle(
                       fontFamily: MyFont.alegreyaSansRegular,
                       fontSize: width * 0.07),
@@ -214,13 +213,15 @@ class _HomePageState extends State<HomePage> {
                       size: width * 0.08,
                     ),
                     title: Text(
-                      'How Mind Works?',
+                      'How the Mind Works',
                       style: TextStyle(
                           color: MyColor.green,
                           fontFamily: MyFont.alegreyaSansRegular,
                           fontSize: width * 0.05),
                     ),
                     onTap: () {
+                      _launchInBrowser(
+                          "https://www.goodreads.com/book/show/835623.How_the_Mind_Works");
                       Navigator.pop(context);
                     },
                   ),
@@ -231,13 +232,15 @@ class _HomePageState extends State<HomePage> {
                       size: width * 0.08,
                     ),
                     title: Text(
-                      'Mind',
+                      'The Power Of Mind',
                       style: TextStyle(
                           color: MyColor.green,
                           fontFamily: MyFont.alegreyaSansRegular,
                           fontSize: width * 0.05),
                     ),
                     onTap: () {
+                      _launchInBrowser(
+                          "https://www.goodreads.com/book/show/29428514-the-power-of-mind---17-books-collection");
                       Navigator.pop(context);
                     },
                   ),
@@ -248,13 +251,15 @@ class _HomePageState extends State<HomePage> {
                       size: width * 0.08,
                     ),
                     title: Text(
-                      'Relaxation',
+                      'My Year Of Rest',
                       style: TextStyle(
                           color: MyColor.green,
                           fontFamily: MyFont.alegreyaSansRegular,
                           fontSize: width * 0.05),
                     ),
                     onTap: () {
+                      _launchInBrowser(
+                          "https://www.goodreads.com/book/show/44279110-my-year-of-rest-and-relaxation");
                       Navigator.pop(context);
                     },
                   ),
@@ -316,6 +321,14 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  Future<void> _launchInBrowser(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }
 

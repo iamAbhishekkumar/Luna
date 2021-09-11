@@ -194,7 +194,7 @@ class _PlayerWidgetState extends State<PlayerWidget> {
                 onPressed: () => handleLooping(),
                 icon: Icon(
                   LineIcons.retweet,
-                  color: isLoopingCurrentItem ? Colors.grey : MyColor.yellow,
+                  color: isLoopingCurrentItem ? Colors.grey : Colors.grey,
                   size: _width * 0.1,
                 ),
               ),
