@@ -14,7 +14,7 @@
 
 <a href="url"><img src="README_Assets/ss1.png" height="auto" width="300"></a>    <a href="url"><img src="README_Assets/ss2.png" height="auto" width="300"></a> <a href="url"><img src="README_Assets/ss3.png" height="auto" width="300"></a>
 
-## Download [<img  src="README_Assets/download.png" alt="Download" width=30>](https://github.com/iamAbhishekkumar/Luna/releases/download/v0.0.1/Luna.apk)
+## Download [<img  src="README_Assets/download.png" alt="Download" width=30>](https://github.com/iamAbhishekkumar/Luna/releases/tag/v0.0.1)
 
 ## References
 
